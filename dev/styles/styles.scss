@@ -29,7 +29,7 @@ html {
 
 @media (max-width: 1080px) {
   .logo img {
-    left: 50%;
+    left: 40%;
     top: 15%;
     width: 400px;
     overflow: hidden;
@@ -40,7 +40,7 @@ html {
 @media (max-width: 940px) {
   .logo img {
     left: 30%;
-    top: 15%;
+    top: 20%;
     width: 400px;
     overflow: hidden;
     opacity: 0.1;
@@ -49,9 +49,9 @@ html {
 
 @media (max-width: 540px) {
   .logo img {
-    left: 10%;
-    top: 15%;
-    width: 400px;
+    left: 25%;
+    top: 25%;
+    width: 300px;
     overflow: hidden;
     opacity: 0.1;
   }
