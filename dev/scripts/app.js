@@ -20,7 +20,8 @@ class App extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.removeItem = this.removeItem.bind(this);
 		this.login = this.login.bind(this);
-		this.logout = this.logout.bind(this);
+    this.logout = this.logout.bind(this);
+    this.clearBagForm = this.clearBagForm.bind(this);
 	}
 	login() {
 		auth.signInWithPopup(provider)
@@ -48,8 +49,17 @@ class App extends React.Component {
 			bagItem: this.state.bagType,
 			user: this.state.bagName,
 		};
-		dbRef.push(newItem);
-	}
+    dbRef.push(newItem);
+    this.clearBagForm();
+  }
+  
+  clearBagForm() {
+    this.setState({
+      bagName: '',
+			bagType: ''
+    });
+  }
+
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value,
