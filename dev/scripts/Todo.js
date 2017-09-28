@@ -12,7 +12,8 @@ class Todo extends React.Component {
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.addTodo = this.addTodo.bind(this);
-		this.removeTodo = this.removeTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
+    this.clearTodoForm = this.clearTodoForm.bind(this);
 	}
 
 	handleChange(event) {
@@ -23,16 +24,27 @@ class Todo extends React.Component {
 
 	addTodo(event) {
 		event.preventDefault();
-		let description = this.state.todo;
-		let timestamp = new Date().toString();
+    let description = this.state.todo;
+    const options = {  
+      weekday: "long", year: "numeric", month: "short",  
+      day: "numeric", hour: "2-digit", minute: "2-digit"  
+    }; 
+		let timestamp = new Date().toLocaleTimeString("en-us", options);
 		const todo = {
 			description,
 			timestamp,
 		}
 		const bag = this.props.bagId;
 		const bagRef = firebase.database().ref(`/items/${bag}/items`);
-		bagRef.push(todo);
-	}
+    bagRef.push(todo);
+    this.clearTodoForm();
+  }
+  
+  clearTodoForm() {
+    this.setState({
+      todo: ''
+    });
+  }
 
 	removeTodo(keyToRemove, bag) {
 		console.log(keyToRemove, bag);
@@ -44,7 +56,7 @@ class Todo extends React.Component {
 		return (
 			<div className='todoForm'>
 				<form className='todoFormButton' onSubmit={this.addTodo}>
-					<input placeholder="Ex. Laptop, wallet, iPod" type="text" name="todo" value={this.state.todo} onChange={this.handleChange}/>
+					<input required placeholder="Ex. Laptop, wallet, iPod" type="text" name="todo" value={this.state.todo} onChange={this.handleChange}/>
 					<button>Add Item</button>
 				</form>
 				<ul>
@@ -60,7 +72,7 @@ class Todo extends React.Component {
 	}
 
 const TodoItem = (props) => {
-	console.log(props);
+  console.log(props);
 	return (
 		<li>
 			<span className='bagItemDescription'>{props.item.contents.description}</span>

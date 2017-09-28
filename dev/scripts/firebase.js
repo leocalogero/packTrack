@@ -9,6 +9,7 @@ var config = {
   storageBucket: "fun-food-friends-7b9e6.appspot.com",
   messagingSenderId: "92522490777"
 };
+
 firebase.initializeApp(config);
 
 export const provider = new firebase.auth.GoogleAuthProvider();
